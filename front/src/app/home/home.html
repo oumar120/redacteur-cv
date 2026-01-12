@@ -1,0 +1,30 @@
+<div class="flex flex-col md:flex-row h-screen bg-[#f3f2ef]">
+	<!-- Partie formulaire: caché si preview actif -->
+	<div class="w-full p-8 overflow-auto border-b md:border-b-0 md:border-r border-gray-200 bg-white"
+		[ngClass]="{
+			'hidden': formService.preview(),
+			'md:w-1/2': !formService.preview(),
+			'md:block': !formService.preview()
+		}">
+		<app-cv-form></app-cv-form>
+	</div>
+	<!-- Partie aperçu (modèle): caché sur mobile par défaut, visible si preview actif -->
+	<div class="w-full p-2 md:p-8 overflow-auto preview-canvas"
+		[ngClass]="{
+			'hidden md:block': !formService.preview(),
+			'block': formService.preview(),
+			'md:w-1/2': !formService.preview(),
+			'w-full': formService.preview(),
+			'flex flex-col items-center justify-start': formService.preview()
+		}">
+		<div class="w-full flex justify-center">
+				<div class="w-full max-w-[28cm] h-auto md:h-[29.7cm] md:min-h-[29.7cm]">
+					<app-cv-preview class="md:h-full"></app-cv-preview>
+			</div>
+		</div>
+	</div>
+	<!-- Bouton flottant Aperçu sur mobile quand on est sur le formulaire -->
+	<button *ngIf="!formService.preview()" class="md:hidden fixed bottom-4 right-4 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg z-50 flex items-center gap-2" (click)="formService.togglePreview()">
+		<i class="bi bi-eye-fill"></i> Aperçu
+	</button>
+</div>

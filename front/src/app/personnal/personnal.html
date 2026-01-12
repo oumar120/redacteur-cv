@@ -1,0 +1,172 @@
+<div  [formGroup]="personal">
+<div class="flex items-start space-x-6 mb-4">
+				<!-- Photo -->
+				<div class="w-24 h-24 flex items-center justify-center bg-gray-100 rounded border border-gray-200 cursor-pointer flex-shrink-0">
+					<span class="text-gray-400 text-2xl">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A2 2 0 0020 6.382V5a2 2 0 00-2-2H6a2 2 0 00-2 2v1.382a2 2 0 00.447 1.342L9 10m6 0v4m0 0l-4.553 2.276A2 2 0 014 17.618V19a2 2 0 002 2h12a2 2 0 002-2v-1.382a2 2 0 00-.447-1.342L15 14zm0 0V10" />
+						</svg>
+					</span>
+				</div>
+				<!-- Prénom, Nom, Email -->
+				<div class="flex-1">
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+						<div>
+							<label class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
+							<input type="text" class="w-full bg-gray-100 border border-gray-200 rounded px-3 py-2 focus:outline-none" 
+							placeholder="Prénom" formControlName="prenom" />
+						</div>
+						<div>
+							<label class="block text-sm font-medium text-gray-700 mb-1">Nom de famille</label>
+							<input type="text" class="w-full bg-gray-100 border border-gray-200 rounded px-3 py-2 focus:outline-none" 
+							placeholder="Nom de famille" formControlName="nom" />
+						</div>
+					</div>
+					<div class="mt-4">
+						<label class="block text-sm font-medium text-gray-700 mb-1">Adresse e-mail</label>
+						<input type="email" class="w-full bg-gray-100 border border-gray-200 rounded px-3 py-2 focus:outline-none" 
+						placeholder="Adresse e-mail" formControlName="email" />
+					</div>
+				</div>
+			    </div>
+			<!-- Autres champs -->
+			<div class="space-y-4">
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-1">Numéro de téléphone</label>
+					<input type="text" class="w-full bg-gray-100 border border-gray-200 rounded px-3 py-2 focus:outline-none" 
+					placeholder="Numéro de téléphone" formControlName="phone" />
+				</div>
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-1">Adresse</label>
+					<input type="text" class="w-full bg-gray-100 border border-gray-200 rounded px-3 py-2 focus:outline-none" 
+					placeholder="Adresse" formControlName="address" />
+				</div>
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-1">Code postal</label>
+						<input type="text" class="w-full bg-gray-100 border border-gray-200 rounded px-3 py-2 focus:outline-none" 
+						placeholder="Code postal" formControlName="postalCode" />
+					</div>
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-1">Ville</label>
+						<input type="text" class="w-full bg-gray-100 border border-gray-200 rounded px-3 py-2 focus:outline-none" 
+						placeholder="Ville" formControlName="city" />
+					</div>
+                </div>
+				<!-- Champs personnalisés ajoutés -->
+				<div *ngIf="personal.get('dateN')" class="mb-4">
+					<label class="block text-sm font-medium text-gray-700 mb-1">Date de naissance</label>
+					<div class="flex items-center max-w-3xl mx-auto">
+						<input formControlName="dateN" type="date" class="flex-1 bg-gray-100 border border-gray-200 rounded-l-md px-3 py-2 focus:outline-none" />
+						<button type="button" (click)="removePersonalField('dateN')" class="p-2 border border-gray-300 rounded-r-md -ml-px text-gray-600 hover:bg-gray-100" title="Supprimer">
+							<i class="bi bi-trash" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+                <div *ngIf="personal.get('lieuN')" class="mb-4">
+					<label class="block text-sm font-medium text-gray-700 mb-1">Lieu de naissance</label>
+					<div class="flex items-center max-w-3xl mx-auto">
+						<input formControlName="lieuN" type="text" class="flex-1 bg-gray-100 border border-gray-200 rounded-l-md px-3 py-2 focus:outline-none" />
+						<button type="button" (click)="removePersonalField('lieuN')" class="p-2 border border-gray-300 rounded-r-md -ml-px text-gray-600 hover:bg-gray-100" title="Supprimer">
+							<i class="bi bi-trash" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+                <div *ngIf="personal.get('sexe')" class="mb-4">
+					<label class="block text-sm font-medium text-gray-700 mb-1">Sexe</label>
+					<div class="flex items-center max-w-3xl mx-auto">
+						<input formControlName="sexe" type="text" class="flex-1 bg-gray-100 border border-gray-200 rounded-l-md px-3 py-2 focus:outline-none" />
+						<button type="button" (click)="removePersonalField('sexe')" class="p-2 border border-gray-300 rounded-r-md -ml-px text-gray-600 hover:bg-gray-100" title="Supprimer">
+							<i class="bi bi-trash" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+                <div *ngIf="personal.get('nationalite')" class="mb-4">
+					<label class="block text-sm font-medium text-gray-700 mb-1">Nationalité</label>
+					<div class="flex items-center max-w-3xl mx-auto">
+						<input formControlName="nationalite" type="text" class="flex-1 bg-gray-100 border border-gray-200 rounded-l-md px-3 py-2 focus:outline-none" />
+						<button type="button" (click)="removePersonalField('nationalite')" class="p-2 border border-gray-300 rounded-r-md -ml-px text-gray-600 hover:bg-gray-100" title="Supprimer">
+							<i class="bi bi-trash" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+                <div *ngIf="personal.get('etatCivil')" class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">État civil</label>
+                    <div class="flex items-center max-w-3xl mx-auto">
+                        <input formControlName="etatCivil" type="text" class="flex-1 bg-gray-100 border border-gray-200 rounded-l-md px-3 py-2 focus:outline-none" />
+                        <button type="button" (click)="removePersonalField('etatCivil')" class="p-2 border border-gray-300 rounded-r-md -ml-px text-gray-600 hover:bg-gray-100" title="Supprimer">
+                            <i class="bi bi-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="personal.get('internet')" class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Site internet</label>
+                    <div class="flex items-center max-w-3xl mx-auto">
+                        <input formControlName="internet" type="text" class="flex-1 bg-gray-100 border border-gray-200 rounded-l-md px-3 py-2 focus:outline-none" />
+                        <button type="button" (click)="removePersonalField('internet')" class="p-2 border border-gray-300 rounded-r-md -ml-px text-gray-600 hover:bg-gray-100" title="Supprimer">
+                            <i class="bi bi-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="personal.get('linkedin')" class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
+                    <div class="flex items-center max-w-3xl mx-auto">
+                        <input formControlName="linkedin" type="text" class="flex-1 bg-gray-100 border border-gray-200 rounded-l-md px-3 py-2 focus:outline-none" />
+                        <button type="button" (click)="removePersonalField('linkedin')" class="p-2 border border-gray-300 rounded-r-md -ml-px text-gray-600 hover:bg-gray-100" title="Supprimer">
+                            <i class="bi bi-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="personal.get('permis')" class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Permis de conduire</label>
+                    <div class="flex items-center max-w-3xl mx-auto">
+                        <input formControlName="permis" type="text" class="flex-1 bg-gray-100 border border-gray-200 rounded-l-md px-3 py-2 focus:outline-none" />
+                        <button type="button" (click)="removePersonalField('permis')" class="p-2 border border-gray-300 rounded-r-md -ml-px text-gray-600 hover:bg-gray-100" title="Supprimer">
+                            <i class="bi bi-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="personal.get('champ')" class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Champ personnalisé</label>
+                    <div class="flex items-center max-w-3xl mx-auto">
+                        <input formControlName="champ" type="text" class="flex-1 bg-gray-100 border border-gray-200 rounded-l-md px-3 py-2 focus:outline-none" />
+                        <button type="button" (click)="removePersonalField('champ')" class="p-2 border border-gray-300 rounded-r-md -ml-px text-gray-600 hover:bg-gray-100" title="Supprimer">
+                            <i class="bi bi-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+				<!-- Boutons d'ajout de champs personnalisés -->
+				<div class="mt-4">
+					<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+						<button type="button" (click)="addPersonalField('dateN','')" class="flex items-center w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-700 text-sm hover:bg-gray-100">
+							<span class="mr-1 text-lg font-bold">&#43;</span> Date de naissance
+						</button>
+						<button type="button" (click)="addPersonalField('lieuN','')" class="flex items-center w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-700 text-sm hover:bg-gray-100">
+							<span class="mr-1 text-lg font-bold">&#43;</span> Lieu de naissance
+						</button>
+						<button type="button" (click)="addPersonalField('sexe','')" class="flex items-center w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-700 text-sm hover:bg-gray-100">
+							<span class="mr-1 text-lg font-bold">&#43;</span> Sexe
+						</button>
+						<button type="button" (click)="addPersonalField('nationalite','')" class="flex items-center w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-700 text-sm hover:bg-gray-100">
+							<span class="mr-1 text-lg font-bold">&#43;</span> Nationalité
+						</button>
+						<button type="button" (click)="addPersonalField('etatCivil','')" class="flex items-center w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-700 text-sm hover:bg-gray-100">
+							<span class="mr-1 text-lg font-bold">&#43;</span> État civil
+						</button>
+						<button type="button" (click)="addPersonalField('internet','')" class="flex items-center w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-700 text-sm hover:bg-gray-100">
+							<span class="mr-1 text-lg font-bold">&#43;</span> Site internet
+						</button>
+                        <button type="button" (click)="addPersonalField('linkedin','')" class="flex items-center w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-700 text-sm hover:bg-gray-100">
+							<span class="mr-1 text-lg font-bold">&#43;</span> LinkedIn
+						</button>
+                        <button type="button" (click)="addPersonalField('permis','')" class="flex items-center w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-700 text-sm hover:bg-gray-100">
+							<span class="mr-1 text-lg font-bold">&#43;</span> Permis de conduire
+						</button>
+                        
+						<button type="button" (click)="addPersonalField('champ','')" class="flex items-center w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-700 text-sm hover:bg-gray-100">
+							<span class="mr-1 text-lg font-bold">&#43;</span> Champ personnalisé
+						</button>
+					</div>
+				</div>
+			</div>
+</div>

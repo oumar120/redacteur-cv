@@ -1,0 +1,10 @@
+/* Light gray canvas for the preview column so models' edges read clearly */
+.preview-canvas {
+	background-color: #f3f2ef; /* Tailwind gray-100 */
+}
+
+/* Optional: ensure full-height column keeps the same background when content scrolls */
+.preview-canvas .app-cv-preview,
+.preview-canvas app-cv-preview {
+	min-height: 100%;
+}

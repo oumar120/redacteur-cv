@@ -1,0 +1,9 @@
+:host {
+	display: block;
+}
+
+/* Keep children block-level so layout inside the preview behaves predictably */
+:host app-chrono, :host app-circulaire, :host app-moderne {
+	display: block;
+}
+

@@ -1,0 +1,153 @@
+<div class="cv-model-wrap">
+<div class="cv-sheet h-[29.7cm] bg-white flex flex-col overflow-hidden mt-4 mx-3 shadow-md md:mt-0 md:mx-0 md:shadow-sm">
+  <header class="bg-[#f2f3f2] p-10 flex items-center justify-between border-b border-gray-200">
+    <div>
+      <h1 class="text-3xl font-bold">{{ personal?.get('prenom')?.value }} {{ personal?.get('nom')?.value }}</h1>
+      <div class="text-sm text-gray-800 mt-1">{{ personal?.get('title')?.value || 'Software engineer' }}</div>
+      
+      <!-- Contact info inline -->
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-3 text-xs text-gray-600">
+        <span class="inline-flex items-center gap-2"><i class="bi bi-envelope-fill text-base" style="color: #2c86d6;">
+        </i> {{ personal?.get('email')?.value }}</span>
+        <span class="inline-flex items-center gap-2"><i class="bi bi-telephone-fill text-base" style="color: #2c86d6;">
+        </i> {{ personal?.get('phone')?.value }}</span>
+        <span class="inline-flex items-center gap-2"><i class="bi bi-geo-alt-fill text-base" style="color: #2c86d6;">
+        </i> {{ personal?.get('city')?.value }}</span>
+        <span class="inline-flex items-center gap-2"><i class="bi bi-credit-card-2-front-fill text-base" style="color: #2c86d6;">
+        </i> {{ personal?.get('permis de conduire')?.value || 'Permis B' }}</span>
+      </div>
+    </div>
+    
+    <!-- Avatar (top right) -->
+    <div class="w-20 h-20 rounded-full overflow-hidden shrink-0">
+      <img *ngIf="personal?.get('photo')?.value as photo" [src]="photo" alt="avatar" class="w-full h-full object-cover">
+      <div *ngIf="!personal?.get('photo')?.value" class="w-full h-full bg-gray-300"></div>
+    </div>
+  </header>
+
+  <!-- 2-column layout with sidebar and content -->
+  <div class="flex flex-1 overflow-hidden">
+    <!-- LEFT SIDEBAR (1/3) - Titles and Dates -->
+    <div class="w-1/3 bg-white p-8 overflow-y-auto">
+
+      <!-- Profil section title (no date) -->
+      <div *ngIf="profile" class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6]">Profil</h3>
+      </div>
+
+      <!-- Compétences techniques -->
+      <div *ngIf="skillsControls.length > 0" class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6]">Compétences techniques</h3>
+      </div>
+
+      <!-- Langues -->
+      <div *ngIf="languagesControls.length > 0" class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6]">Langues</h3>
+      </div>
+
+      <!-- Expérience professionnelle -->
+      <div *ngIf="experiencesControls.length > 0" class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6] mb-3">Expérience professionnelle</h3>
+        <div class="space-y-4">
+          <div *ngFor="let e of experiencesControls" class="text-xs text-gray-600">
+            <div class="font-medium">de {{ e.get('startMonth')?.value }} {{ e.get('startYear')?.value }} <span *ngIf="!e.get('ongoing')?.value">à {{ e.get('endMonth')?.value }} {{ e.get('endYear')?.value }}</span><span *ngIf="e.get('ongoing')?.value">à ce jour</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formation -->
+      <div *ngIf="formationsControls.length > 0" class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6] mb-3">Formation</h3>
+        <div class="space-y-4">
+          <div *ngFor="let f of formationsControls" class="text-xs text-gray-600">
+            <div class="font-medium">de {{ f.get('startMonth')?.value }} {{ f.get('startYear')?.value }} <span *ngIf="!f.get('ongoing')?.value">à {{ f.get('endMonth')?.value }} {{ f.get('endYear')?.value }}</span><span *ngIf="f.get('ongoing')?.value">à ce jour</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Centres d'intérêt -->
+      <div *ngIf="interestControls.length > 0">
+        <h3 class="text-sm font-bold text-[#2c86d6]">Centres d'intérêt</h3>
+      </div>
+    </div>
+
+    <!-- RIGHT CONTENT (2/3) + vertical line and section markers -->
+    <div class="relative w-2/3 bg-white p-8 space-y-8 overflow-y-auto">
+
+      <!-- Vertical line entre sidebar et contenu -->
+      <div class="absolute top-0 bottom-0 left-8 w-px bg-gray-300"></div>
+
+      <!-- Profil section -->
+      <section *ngIf="profile" class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="text-sm text-gray-700 whitespace-pre-line">{{ profile }}</div>
+      </section>
+
+      <!-- Compétences techniques -->
+      <section *ngIf="skillsControls.length > 0" class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="space-y-2">
+          <div *ngFor="let s of skillsControls" class="flex items-center gap-2 text-sm">
+            <span class="w-2 h-2 bg-[#2c86d6]"></span>
+            <span class="text-gray-700">{{ s.get('name')?.value }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Langues -->
+      <section *ngIf="languagesControls.length > 0" class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="space-y-2">
+          <div *ngFor="let l of languagesControls" class="flex items-center gap-2 text-sm">
+            <span class="text-gray-700">{{ l.get('language')?.value }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Expérience professionnelle -->
+      <section *ngIf="experiencesControls.length > 0" class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="space-y-6">
+          <div *ngFor="let e of experiencesControls">
+            <div>
+              <div class="font-semibold text-sm">{{ e.get('title')?.value }}</div>
+              <div class="italic text-sm text-[#2c86d6]">{{ e.get('employer')?.value }}<span *ngIf="e.get('city')">, {{ e.get('city')?.value }}</span></div>
+              <div class="text-xs text-gray-700 mt-2 space-y-1">
+                <div *ngFor="let line of (e.get('description')?.value || '').split('\n')" [hidden]="!line.trim()">{{ line.trim() }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formation -->
+      <section *ngIf="formationsControls.length > 0" class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="space-y-6">
+          <div *ngFor="let f of formationsControls">
+            <div>
+              <div class="font-semibold text-sm">{{ f.get('diploma')?.value }}</div>
+              <div class="italic text-sm text-[#2c86d6]">{{ f.get('establishment')?.value }}<span *ngIf="f.get('city')">, {{ f.get('city')?.value }}</span></div>
+              <div class="text-xs text-gray-700 mt-2 space-y-1">
+                <div *ngFor="let line of (f.get('description')?.value || '').split('\n')" [hidden]="!line.trim()">{{ line.trim() }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Centres d'intérêt -->
+      <section *ngIf="interestControls.length > 0" class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="space-y-2">
+          <div *ngFor="let i of interestControls" class="flex items-center gap-2 text-sm">
+            <span class="text-gray-700">{{ i.value }}</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+</div>
+<!-- cv-model-wrap -->

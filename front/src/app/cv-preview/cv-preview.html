@@ -1,0 +1,23 @@
+<!-- Model display: extra padding-bottom so content flows under the fixed bar -->
+<div [ngSwitch]="formService.selectedModel()" class="w-full pb-24">
+  <app-chrono *ngSwitchCase="'chrono'" [form]="formService.form"></app-chrono>
+</div>
+
+<!-- Bottom control bar: floating fixed bar with padding and shadow -->
+<div class="fixed bottom-4 bg-white border-t p-4 flex items-center justify-between z-40 shadow-[0_-8px_16px_rgba(0,0,0,0.12)] rounded-xl"
+  [ngClass]="formService.preview()
+    ? 'left-4 right-4'
+    : 'md:left-1/2 md:w-1/2 md:right-auto'">
+  <!-- Model selector dropdown -->
+  <div class="flex items-center gap-2">
+    <span class="text-sm font-medium hidden md:inline">Modèles:</span>
+    <button class="px-3 py-1 rounded" [ngClass]="formService.selectedModel() === 'chrono' ? 'bg-blue-600 text-white' : 'bg-gray-200'" (click)="formService.selectedModel.set('chrono')">Chrono</button>
+    <button class="px-3 py-1 rounded" [ngClass]="formService.selectedModel() === 'circulaire' ? 'bg-blue-600 text-white' : 'bg-gray-200'" (click)="formService.selectedModel.set('circulaire')">Circulaire</button>
+    <button class="px-3 py-1 rounded" [ngClass]="formService.selectedModel() === 'moderne' ? 'bg-blue-600 text-white' : 'bg-gray-200'" (click)="formService.selectedModel.set('moderne')">Moderne</button>
+  </div>
+  <!-- Aperçu button -->
+  <button class="px-4 py-1 bg-blue-600 text-white rounded shadow flex items-center gap-2" (click)="formService.togglePreview()">
+    <i class="bi" [ngClass]="formService.preview() ? 'bi-pencil-fill' : 'bi-eye-fill'"></i>
+    <span>{{ formService.preview() ? 'Éditer' : 'Aperçu' }}</span>
+  </button>
+</div>

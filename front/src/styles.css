@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+/* Ensure description fields in previews wrap and break long words
+	 - preserve user newlines, but wrap long lines and words
+	 - targets elements that already use Tailwind's `whitespace-pre-line` and any .cv-description class
+*/
+.whitespace-pre-line,
+.cv-description,
+app-chrono .cv-description,
+app-circulaire .cv-description,
+app-moderne .cv-description,
+app-cv-preview .cv-description {
+	white-space: pre-line; /* respect newlines, allow wrapping */
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+/* Defensive rule: any direct div that looks like a description should also wrap */
+div.text-sm, div.text-gray-800, div.text-gray-700 {
+	overflow-wrap: break-word;
+	word-break: break-word;
+}

@@ -1,0 +1,185 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<!-- Chrono template — 2-column layout with header and sidebar -->
+<div class="min-h-screen bg-white">
+  <!-- Header in light gray -->
+  <header class="bg-gray-100 p-12 flex items-center justify-between border-b border-gray-300">
+    <div>
+      <h1 class="text-3xl font-bold ">{{ personal.prenom }} {{ personal.nom }}</h1>
+      <div class="text-sm text-gray-600 mt-1">{{ personal.title|default:"Software engineer" }}</div>
+      
+      <!-- Contact info inline -->
+      <div class="flex flex-wrap gap-4 mt-3 text-xs text-gray-600">
+        <span><i class="bi bi-envelope-fill text-xl leading-none shrink-0 text-[#2c86d6]"></i> {{ personal.email }}</span>
+        <span><i class="bi bi-telephone-fill text-xl leading-none shrink-0 text-[#2c86d6]"></i> {{ personal.phone }}</span>
+        <span><i class="bi bi-geo-alt-fill text-xl leading-none shrink-0 text-[#2c86d6]"></i> {{ personal.city }}</span>
+        <span><i class="bi bi-credit-card-2-front-fill text-xl leading-none shrink-0 text-[#2c86d6]"></i> {{ personal.permis|default:"Permis B" }}</span>
+      </div>
+    </div>
+    
+    <!-- Avatar (top right) -->
+    <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
+      {% if personal.photo %}
+      <img src="{{ personal.photo }}" alt="avatar" class="w-full h-full object-cover">
+      {% else %}
+      <div class="w-full h-full bg-gray-300"></div>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- 2-column layout with sidebar and content -->
+  <div class="flex">
+    <!-- LEFT SIDEBAR (1/3) - Titles and Dates -->
+    <div class="w-1/3 bg-white p-8">
+
+      <!-- Profil section title (no date) -->
+      {% if profile %}
+      <div class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6]">Profil</h3>
+      </div>
+      {% endif %}
+
+      <!-- Compétences techniques -->
+      {% if skills %}
+      <div class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6]">Compétences techniques</h3>
+      </div>
+      {% endif %}
+
+      <!-- Langues -->
+      {% if languages %}
+      <div class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6]">Langues</h3>
+      </div>
+      {% endif %}
+
+      <!-- Expérience professionnelle -->
+      {% if experiences %}
+      <div class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6] mb-3">Expérience professionnelle</h3>
+        <div class="space-y-4">
+          {% for e in experiences %}
+          <div class="text-xs text-gray-600">
+            <div class="font-medium">de {{ e.startMonth }} {{ e.startYear }} {% if not e.ongoing %}à {{ e.endMonth }} {{ e.endYear }}{% else %}à ce jour{% endif %}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Formation -->
+      {% if formations %}
+      <div class="mb-8">
+        <h3 class="text-sm font-bold text-[#2c86d6] mb-3">Formation</h3>
+        <div class="space-y-4">
+          {% for f in formations %}
+          <div class="text-xs text-gray-600">
+            <div class="font-medium">de {{ f.startMonth }} {{ f.startYear }} {% if not f.ongoing %}à {{ f.endMonth }} {{ f.endYear }}{% else %}à ce jour{% endif %}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Centres d'intérêt -->
+      {% if interests %}
+      <div>
+        <h3 class="text-sm font-bold text-[#2c86d6]">Centres d'intérêt</h3>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- RIGHT CONTENT (2/3) + vertical line and section markers -->
+    <div class="relative w-2/3 bg-white p-8 space-y-8">
+
+      <!-- Vertical line entre sidebar et contenu -->
+      <div class="absolute top-0 bottom-0 left-8 w-px bg-gray-300"></div>
+
+      <!-- Profil section -->
+      {% if profile %}
+      <section class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="text-sm text-gray-700 whitespace-pre-line">{{ profile }}</div>
+      </section>
+      {% endif %}
+
+      <!-- Compétences techniques -->
+      {% if skills %}
+      <section class="relative pl-10">
+        <div class="space-y-2">
+          {% for s in skills %}
+          <div class="flex items-center gap-2 text-sm">
+            <span class="w-2 h-2 bg-[#2c86d6]"></span>
+            <span class="text-gray-700">{{ s.name }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <!-- Langues -->
+      {% if languages %}
+      <section class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="space-y-2">
+          {% for l in languages %}
+          <div class="flex items-center gap-2 text-sm">
+            <span class="text-gray-700">{{ l.language }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <!-- Expérience professionnelle -->
+      {% if experiences %}
+      <section class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="space-y-6">
+          {% for e in experiences %}
+          <div>
+            <div>
+              <div class="font-semibold text-sm">{{ e.title }}</div>
+              <div class="italic text-sm text-[#2c86d6]">{{ e.employer }}{% if e.city %}, {{ e.city }}{% endif %}</div>
+              <div class="text-xs text-gray-700 mt-2 space-y-1 whitespace-pre-line">{{ e.description }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <!-- Formation -->
+      {% if formations %}
+      <section class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="space-y-6">
+          {% for f in formations %}
+            <div>
+              <div class="font-semibold text-sm">{{ f.diploma }}</div>
+              <div class="italic text-sm text-[#2c86d6]">{{ f.establishment }}{% if f.city %}, {{ f.city }}{% endif %}</div>
+              <div class="text-xs text-gray-700 mt-2 space-y-1 whitespace-pre-line">{{ f.description }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <!-- Centres d'intérêt -->
+      {% if interests %}
+      <section class="relative pl-10">
+        <span class="w-2 h-2 bg-[#2c86d6] absolute left-8 -translate-x-1/2 top-2"></span>
+        <div class="space-y-2">
+          {% for i in interests %}
+          <div class="flex items-center gap-2 text-sm">
+            <span class="text-gray-700">{{ i }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+    </div>
+  </div>
+</div>

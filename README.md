@@ -1,6 +1,8 @@
 ## Important à savoir 
 Ce dépot présente une version simplifiée du générateur de cv que j'ai dévloppé en privé (version complete non publique car destiné à la monétisation)
 ## Plateforme complète de création de CV
+https://github.com/user-attachments/assets/ae25e2b6-71dd-4d43-b5b0-c4a7a4806d72
+
 
 Projet personnel full‑stack démontrant la création d’une vraie application de génération de CV en ligne :
 
